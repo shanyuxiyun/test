@@ -1,4 +1,4 @@
-package test.regexp;
+package com.lee.test.regexp;
 
 import static org.junit.Assert.assertEquals;
 
