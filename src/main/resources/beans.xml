@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:lang="http://www.springframework.org/schema/lang"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/lang
+        http://www.springframework.org/schema/lang/spring-lang.xsd">
+
+	<bean id="movie.result.path" class="java.lang.String">
+		<constructor-arg type="java.lang.String" value="D:/" />
+	</bean>
+
+	<bean id="movie.walker" class="com.lee.douban.movie.MovieWalker">
+		<property name="excelWorker" ref="movie.excel.walker"></property>
+		<property name="soupExt" ref="movie.jsoup" />
+	</bean>
+
+	<bean id="movie.jsoup" class="com.lee.jsoup.ext.JSoupExt">
+		<property name="baseUri" value="https://movie.douban.com/" />
+	</bean>
+
+	<bean id="movie.datamapper" class="com.lee.douban.movie.MovieDataMapper"></bean>
+
+	<bean id="movie.excel.walker" class="com.lee.douban.movie.MovieExcelWorker">
+		<property name="dataMapper" ref="movie.datamapper" />
+		<property name="filePath" ref="movie.result.path" />
+		<property name="header">
+			<props>
+				<prop key="0">名称</prop>
+				<prop key="1">评分</prop>
+				<prop key="2">演员</prop>
+				<prop key="3">别名</prop>
+				<prop key="4">LogoURI</prop>
+				<prop key="5">上映日期</prop>
+			</props>
+		</property>
+	</bean>
+	
+</beans>
